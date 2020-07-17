@@ -2,21 +2,16 @@
 # https://radimrehurek.com/gensim/auto_examples/core/run_core_concepts.html
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
-from gensim import corpora, models, similarities
 from gensim.test.utils import datapath, get_tmpfile
 from gensim.similarities import Similarity
 from gensim.models import word2vec
-from bs4 import BeautifulSoup
-import codecs
-import pandas as pd
 import time
 import pickle
 import re
-import glob
 import faulthandler
 
-
 faulthandler.enable()
+
 
 # Then we read in the entire corpus 
 # - which I previously merged into a single file
@@ -24,40 +19,37 @@ faulthandler.enable()
 # and we create an array of documents
 # This is done because I want to compare documents and their text type
 
-# sentences = []
-
-# for x in glob.glob('x:/data/Malti-gensim/vrt/*.vrt'):    
-
-#     f = codecs.open(x, 'r', 'utf-8')
-#     print("Opened corpus file " + str(x))
-    
-    
-#     soup = BeautifulSoup(f, 'html.parser')
-#     print("Parsed corpus file  " + str(x))
-    
-#     # for doc in soup.find_all('doc'):    
-#     #     documents.append(doc.text)
-#     # print(len(documents))
-
-#     for s in soup.find_all('s'):    
-#         sentences.append(s.text)
-
-# print(len(sentences))
+# f = codecs.open('x:/data/Malti-gensim/maltiv3.vrt', 'r', 'utf-8')
+# print("Opened corpus file")
 
 
-# with open('x:/data/Malti-gensim/maltiv3-sentences.pkl', 'wb') as pickle_file:
-#     pickle.dump(sentences, pickle_file, protocol=pickle.HIGHEST_PROTOCOL)
+# soup = BeautifulSoup(f, 'html.parser')
+# print("Parsed corpus file")
+
+# documents = []
+
+# for doc in soup.find_all('doc'):
+#     #print(doc.get('id'))
+#     documents.append(doc.text)
+# print(len(documents))
+
+
+# with open('x:/data/Malti-gensim/maltiv3.pkl', 'wb') as pickle_file:
+#     pickle.dump(documents, pickle_file, protocol=pickle.HIGHEST_PROTOCOL)
 
 ##### !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ############################################
 #########################################################################################################
 ###### START HERE WHEN PICKLED ##########################################################################
 
 print("Opening the pickled file")
-with open('x:/data/Malti-gensim/maltiv3-sentences.pkl', 'rb') as pickle_load:
-    sentences = pickle.load(pickle_load)
+with open('/mnt/x/data/Malti-gensim/maltiv3.pkl', 'rb') as pickle_load:
+    documents = pickle.load(pickle_load)
 
-alltexts1 = [[word for word in sentence.lower().splitlines() 
-              if not re.match(".*[0-9].*|.*-", word)] for sentence in sentences]
+#alltexts = [[word for word in document.lower().splitlines()] for document in documents]
+
+
+alltexts1 = [[word for word in document.lower().splitlines() 
+              if not re.match(".*[0-9].*|.*-", word)] for document in documents]
 print("Text collection created")
 
 
@@ -92,7 +84,7 @@ print("Text collection created")
 
 print("Creating the model...")
 t = time.process_time()
-model = word2vec.Word2Vec(alltexts1, size=300, window=10, min_count=10, workers=4)
+model = word2vec.Word2Vec(alltexts1, size=300, window=10, min_count=25, workers=2)
 print("Model created, the processing took " + str(time.process_time() - t) + " seconds")
 #5839 = 1.6 hours
 
@@ -101,5 +93,5 @@ print("Calculating the similarity of a word")
 model.wv.most_similar("tajjeb")
 
 finalmodel = model
-fname = get_tmpfile("x:\\data\\Malti-gensim\\model\\maltiv3-s-size300-window10-min10.kv")
+fname = get_tmpfile("/mnt/x/data/Malti-gensim/maltiv3-size300-window10-min25.kv")
 finalmodel.save(fname)

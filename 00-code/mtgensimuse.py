@@ -4,6 +4,8 @@ import numpy as np
 from sklearn.manifold import TSNE
 from gensim.test.utils import get_tmpfile
 from gensim.models import KeyedVectors
+import logging
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 fname2 = get_tmpfile("x:\\data\\Malti-gensim\\model\\maltiv3-size300-window10-min5.kv")
 word_vectors = KeyedVectors.load(fname2, mmap='r')
