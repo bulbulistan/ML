@@ -1,4 +1,5 @@
-var words = window.localStorage.getItem("1");
+var words =
+        '{"\u0715\u072b\u0712\u072c\u0710": [22.970568, -55.150795, 0.8438752293586731], "\u0720\u0720\u071d\u0710": [22.54365, -55.390007, 0.8229877352714539], "\u0715\u071d\u0718\u0721\u0710": [22.774284, -55.03659, 0.786860466003418], "\u0712\u071d\u0718\u0721\u0710": [22.899626, -55.505302, 0.7759663462638855], "\u0710\u071d\u0721\u0721\u0710": [22.54992, -55.227203, 0.7568687200546265], "\u072a\u0721\u072b\u0710": [22.600311, -55.212658, 0.7558534145355225], "\u0719\u0725\u0718\u072a\u0710": [17.882496, -48.463985, 0.7196277379989624], "\u0725\u0715\u0722\u0710": [18.237576, -48.52058, 0.7174093127250671], "\u0720\u071d\u0718\u0721\u0710": [49.5275, -9.709123, 0.7167130708694458], "\u0718\u0720\u0720\u071d\u0710": [21.848179, -51.4507, 0.7158464789390564]}';
 // this is the main data
 // list of three-piece list - x, y, label
 
@@ -62,13 +63,16 @@ for (var u = 0; u < coordkeys.length; u++)
     xdatapoint = {};
     xdatapoint["x"] = processedWords[coordkey][0];
     xdatapoint["y"] = processedWords[coordkey][1];
-    xdatapoint["label"] = coordkey;    
+    xdatapoint["label"] = coordkey;
     xdata.push(xdatapoint);
 }
 
-var points_all = [];
+var points_all = []; //node
 var data = [];
-var labels_all = [];
+var labels_all = []; //label
+
+// http://bl.ocks.org/MoritzStefaner/1377729
+var labelDistance = 0;
 
 var points = points_g.selectAll("circle")
         .data(xdata)

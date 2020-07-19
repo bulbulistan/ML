@@ -1,2 +1,3 @@
 *.gz
 *.csv
+/01-web/test/nbproject/private/
