@@ -15,7 +15,7 @@ word = data.getvalue('input_word')
 
 #get csv data
 allWords = {}
-with open("maltiv3-300-10-5.csv", encoding="utf-8") as f:
+with open("/var/www/html/maltimodel/maltiv3-s-300-10-10.csv", encoding="utf-8") as f:
     reader = csv.reader(f, delimiter=",")
     next(reader)
     for x in reader:        
@@ -28,7 +28,7 @@ if word == None:
 
 else:    
     #import the model
-    fname2 = get_tmpfile("/var/www/html/maltimodel/maltiv3-size300-window10-min5.kv")
+    fname2 = get_tmpfile("/var/www/html/maltimodel/maltiv3-s-size300-window10-min10.kv")
     word_vectors = KeyedVectors.load(fname2, mmap='r')
 
     print("Content-Type: text/html\n")

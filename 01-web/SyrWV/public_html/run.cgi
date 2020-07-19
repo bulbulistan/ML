@@ -15,7 +15,7 @@ word = data.getvalue('input_word')
 
 #get csv data
 allWords = {}
-with open("simtho999-10-25.csv", encoding="utf-8") as f:
+with open("/var/www/html/syrmodel/simtho999-10-25.csv", encoding="utf-8") as f:
     reader = csv.reader(f, delimiter=",")
     next(reader)
     for x in reader:        
@@ -28,7 +28,7 @@ if word == None:
 
 else:    
     #import the model
-    fname2 = get_tmpfile("/var/www/html/simthomodel/simthovectors-size999-window10-min25.kv")
+    fname2 = get_tmpfile("/var/www/html/syrmodel/simthovectors-size999-window10-min25.kv")
     word_vectors = KeyedVectors.load(fname2, mmap='r')
 
     print("Content-Type: text/html\n")
