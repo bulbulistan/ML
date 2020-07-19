@@ -7,19 +7,19 @@ from gensim.models import KeyedVectors
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-fname2 = get_tmpfile("x:\\data\\Simtho-gensim\\model\\simthovectors-size300-window10-min2.kv")
+fname2 = get_tmpfile("x:\\data\\Simtho-gensim\\model\\simthovectors-size300-window10-min25.kv")
 word_vectors = KeyedVectors.load(fname2, mmap='r')
 
 
 try:
-    result = word_vectors.wv.most_similar("ܡܠܟܬܐ")
+    result = word_vectors.wv.most_similar("ܡܠܟܬܐ", topn=20)    
 except:
     print("This word is not in the corpus")
 
 print(result)
 
 
-result = word_vectors.most_similar(positive=['ܓܒܪܐ', 'ܡܠܟܬܐ'], negative=['ܐܢܬܬܐ'])
+result = word_vectors.most_similar(positive=['ܐܢܬܬܐ', 'ܡܠܟܐ'], negative=['ܓܒܪܐ'])
 print("{}: {:.4f}".format(*result[0]))
 
 word_vectors.wv.vocab["ܠܘܬ"].count

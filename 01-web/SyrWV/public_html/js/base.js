@@ -18,12 +18,13 @@ $(document).ready(function () { //begin
             return false;
         }
     }
-
-
+    
     $("#gobutton").click(function () {
         $("#results-graph").empty();
         $("#results-graph").addClass("none");
         var iw = $("#inputword").val();
+        var mod = $("#langsel").val();
+        console.log(mod);
         iw = iw.replace(/\s/g, '');
         console.log("The queried word is " + iw);
         $("#results").removeClass("none");
@@ -49,7 +50,10 @@ $(document).ready(function () { //begin
                         
                         row = document.createElement("tr");
                         wordcell = document.createElement("td");
-                        wordcell.append(key);
+                        wa = document.createAttribute("class");
+                        wa.value = "token";
+                        wordcell.setAttributeNode(wa);
+                        wordcell.append(key);                        
                         row.append(wordcell);
                         
                         distance = results[key][2];
@@ -76,4 +80,15 @@ $(document).ready(function () { //begin
         });
 
     });
+});
+
+$(document).ajaxComplete(function () { //begin
+    $(".token").click(function(){
+        var token = $(this).text();
+        var base = "https://simtho.bethmardutho.org/bonito/run.cgi/first?corpname=simtho&reload=&iquery=&queryselector=phraserow&phrase=";
+        var address = base + token;
+        window.open(address, '_blank');        
+    });
+    
+    // end
 });

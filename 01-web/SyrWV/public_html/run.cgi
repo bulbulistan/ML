@@ -13,6 +13,10 @@ from gensim.models import KeyedVectors
 data = cgi.FieldStorage()
 word = data.getvalue('input_word')
 
+#variables
+model = data.gevalue('');
+
+
 #get csv data
 allWords = {}
 
@@ -21,7 +25,7 @@ allWords = {}
 # they are added to a dictionary with tokens (as they are unique) as keys and a two-item list
 # containing the coordinates
 #with open("/var/www/html/maltimodel/maltiv3-s-300-10-10.csv", encoding="utf-8") as f:
-with open("/var/www/html/syrmodel/simtho999-10-25.csv", encoding="utf-8") as f:
+with open("/var/www/html/syrmodel/simtho300-10-2.csv", encoding="utf-8") as f:
     reader = csv.reader(f, delimiter=",")
     next(reader)
     for x in reader:        
@@ -34,7 +38,7 @@ if word == None:
 
 else:    
     #import the model
-    fname2 = get_tmpfile("/var/www/html/syrmodel/simthovectors-size999-window10-min25.kv")
+    fname2 = get_tmpfile("/var/www/html/syrmodel/simthovectors-size300-window10-min2.kv")
     #fname2 = get_tmpfile("/var/www/html/maltimodel/maltiv3-s-size300-window10-min10.kv")
     word_vectors = KeyedVectors.load(fname2, mmap='r')
 

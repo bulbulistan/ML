@@ -64,6 +64,11 @@
     height: 25px;
 }
 
+#langsel {
+    display: inline !important;
+    height: 30px;
+}
+
 #tableinfo {
     font-size: 12pt;
 }
@@ -81,6 +86,12 @@ th, td {
     border-bottom: 1px solid #ddd;
     width: 100px;
 }
+
+.token:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */

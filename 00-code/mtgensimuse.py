@@ -7,12 +7,12 @@ from gensim.models import KeyedVectors
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-fname2 = get_tmpfile("x:\\data\\Malti-gensim\\model\\maltiv3-size300-window10-min5.kv")
+fname2 = get_tmpfile("x:\\data\\Malti-gensim\\model\\maltiv3-s-size300-window10-min10.kv")
 word_vectors = KeyedVectors.load(fname2, mmap='r')
 
 
 try:
-    result = word_vectors.wv.most_similar("mela")
+    result = word_vectors.wv.most_similar("żiemel")
 except:
     print("This word is not in the corpus")
 
