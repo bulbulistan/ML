@@ -15,6 +15,12 @@ word = data.getvalue('input_word')
 
 #get csv data
 allWords = {}
+
+# this is a list of tokens with x and y coordinates created by means of a t-sne transformation
+# from the model below
+# they are added to a dictionary with tokens (as they are unique) as keys and a two-item list
+# containing the coordinates
+#with open("/var/www/html/maltimodel/maltiv3-s-300-10-10.csv", encoding="utf-8") as f:
 with open("/var/www/html/syrmodel/simtho999-10-25.csv", encoding="utf-8") as f:
     reader = csv.reader(f, delimiter=",")
     next(reader)
@@ -29,14 +35,18 @@ if word == None:
 else:    
     #import the model
     fname2 = get_tmpfile("/var/www/html/syrmodel/simthovectors-size999-window10-min25.kv")
+    #fname2 = get_tmpfile("/var/www/html/maltimodel/maltiv3-s-size300-window10-min10.kv")
     word_vectors = KeyedVectors.load(fname2, mmap='r')
 
     print("Content-Type: text/html\n")
 
     try:
         modelOutput = word_vectors.wv.most_similar(word, topn=10)
-        queryResults = dict(modelOutput)
+        queryResults = dict(modelOutput) # this converts the output to a dictionary with tokens as keys and similarity indexes as values        
+        queryResults[word] = 1 # adds the queried word with the value 1, duh
         
+        # compare the two dictionaries
+        # adds the coordinates to the dictionary 
         for key in queryResults:
             x = allWords[key]
             x.append(queryResults[key])

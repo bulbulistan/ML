@@ -107,7 +107,7 @@ data = xdata;
 
 // Pan and zoom
 var zoom = d3.zoom()
-        .scaleExtent([.5, 300])
+        .scaleExtent([.5, 800])
         .extent([[0, 0], [width, height]])
         .on("zoom", zoomed);
 

@@ -29,19 +29,21 @@ $(document).ready(function () { //begin
         $("#results").removeClass("none");
         $("#results-table").html("<div class='loader'></div");
         $.ajax({
-            url: "run.cgi",
+            url: "http://40.112.167.159/syrwv/run.cgi",
             type: "POST",
             async: true,
             data: {'input_word': iw},
             success: function (response) {
                 if (hasJsonStructure(response) === true) {
                     console.log("The query result is json");                                        
-                    var results = jQuery.parseJSON(response);
+                    var results = jQuery.parseJSON(response); 
+                    // this is a dictionary consisting of the words as keys and a list of similarity index, x coordinate and y coordinate as values
+                    // the queried word with coordinates is added to the end of the dictionary
                     window.localStorage.setItem("1", response);
                     console.log("The query result is parsed to " + results);
                     var keys = Object.keys(results);
                     var table = document.createElement("table");
-                    for (var i = 0; i < keys.length; i++)
+                    for (var i = 0; i < keys.length - 1; i++) // -1 because we don't need to display the last item
                     {
                         var key = keys[i];
                         

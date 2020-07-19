@@ -41,7 +41,7 @@ $(document).ready(function () { //begin
                     console.log("The query result is parsed to " + results);
                     var keys = Object.keys(results);
                     var table = document.createElement("table");
-                    for (var i = 0; i < keys.length; i++)
+                    for (var i = 0; i < keys.length - 1; i++)
                     {
                         var key = keys[i];
                         
